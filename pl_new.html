@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Premier League</title>
+        <img class="logo" src="pl.png">
+        <img class="flag" src="England.png">
+    </head>
+    <link href="teams.css" rel="stylesheet">
+    <style>
+        td{
+            border-color: rgb(77, 9, 74);
+        }
+
+        .buttoncolor
+        {
+            border-color: rgb(255, 0, 242);
+        }
+    </style>
+    <body>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <header>
+            <h2 style="position:absolute;top: 2vh; right: 3vw;">2025-2026</h2>
+        </header>
+        <main>
+            <h2 style="position: absolute;left:30vw;top:11vh">Premier League Standings</h2>
+            <table>
+                <thead id="standings-head"></thead>
+                <tbody id="standings-body"></tbody>
+            </table>
+        </main>
+        <button class="buttonsize buttoncolor"><a href="primeriraliga.html"><spanPrevious>Previous</spanPrevious></a></button>
+        <button class="buttonsize buttoncolor" style="left: 11vw"><a href="homepage.html"><spanHome>Home</spanHome></a></button>
+        <button class="buttonsize buttoncolor" style="left: 20vw"><a href="seriaA.html"><spanNext>Next</spanNext></a></button>
+    </body>
+
+    <!-- Embed the CSV data as a JS variable — works on file:// in all browsers -->
+    <script src="standings/PremierLeague25-26.js"></script>
+    <script>
+        document.querySelector("body").style.backgroundColor = "rgb(0, 210, 220)";
+
+        const lines = PL_DATA.trim().split(/\r?\n/);
+        const head = document.getElementById('standings-head');
+        const tbody = document.getElementById('standings-body');
+
+        // Parse headers
+        const headers = lines[0].split(',');
+        const trHead = document.createElement('tr');
+        headers.forEach(h => {
+            const th = document.createElement('th');
+            th.textContent = h;
+            trHead.appendChild(th);
+        });
+        head.appendChild(trHead);
+
+        // Parse rows (handle quoted fields containing commas)
+        for (let i = 1; i < lines.length; i++) {
+            const cols = [];
+            let cur = '', inQuotes = false;
+            for (let j = 0; j < lines[i].length; j++) {
+                const char = lines[i][j];
+                if (char === '"') inQuotes = !inQuotes;
+                else if (char === ',' && !inQuotes) { cols.push(cur); cur = ''; }
+                else cur += char;
+            }
+            cols.push(cur);
+            const tr = document.createElement('tr');
+            cols.forEach((col, idx) => {
+                const td = document.createElement('td');
+                td.textContent = col;
+                if (headers[idx] && headers[idx].toLowerCase().includes('team')) td.style.textAlign = 'left';
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        }
+    </script>
+</html>

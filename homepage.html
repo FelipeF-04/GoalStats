@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>GOALSTATS</title>
+        
+    </head>
+    <style>
+        .titled
+        {
+            position: absolute;
+            font-size: large;
+            border-style: double;
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-bottom: 5px;
+            left: 1.5vw;
+            right: 90.5vw;
+            top: 3vh;
+ 
+
+        }
+
+        .imagesize
+        {
+            position: absolute;
+            width: 10vw;
+            height: auto;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            
+
+        }
+
+        .imagebutton
+        {
+            position: relative;
+            border-color: rgb(255, 255, 255);
+            width: 9vw;
+            height: 9vw;
+            background-color: rgb(6, 65, 29);
+
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+        .imagebutton:hover{
+            opacity:2;
+        }
+
+        .infobutton      
+        {
+            position: absolute;
+            bottom: 3vh;
+            right: 2vw;
+            width: 6vw;
+            height: 5vh;
+            font-size: large;
+            border-color: black;
+            border-radius: 3px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+        .infobutton:hover{
+            opacity:2;
+        }
+
+    </style>
+    <body>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <header class="titled">GOALSTATS</header>
+        
+        <main>
+            <div class="pl" style="position: absolute; top: 25%; left: 35%;">
+                <button class="imagebutton"><a href="pl.html"><img class="imagesize" src="assets/pl.png"></a></button>
+            </div>
+
+            <div class="seria A" style="position: absolute; top: 25%; left: 45%;">
+                <button class="imagebutton"><a href="seriaA.html"><img class="imagesize" style="width: 8vw;" src="assets/seriaA.png"></a></button>
+            </div>
+
+            <div class="laliga" style="position: absolute; top: 25%; left: 55%">
+                <button class="imagebutton"><a href="laliga.html"><img class="imagesize" src="assets/laliga.png"></a></button>
+            </div>
+
+            <div class="bundesliga" style="position: absolute; top: 45%; left: 35%;">
+                <button class="imagebutton"><a href="bundesliga.html"><img class="imagesize" src="assets/bundesliga.png"></a></button>
+            </div>
+        
+            <div class="ligue1" style="position: absolute;top: 45%; left: 45%;">
+                <button class="imagebutton"><a href="ligue1.html"><img class="imagesize" src="assets/ligue1.png"></a></button>
+            </div>
+
+            <div class="mls" style="position: absolute; top: 45%; left: 55%">
+                <button class="imagebutton"><a href="primeriraliga.html"><img class="imagesize" style="width: 6vw;" src="assets/Primeira_Liga.png"></a></button>
+            </div>
+            
+        </main>
+        <footer>
+            <button onclick="info(); return false;" id="info" class="infobutton">Info</button>
+
+        </footer>
+    </body>
+    </body>
+    <script>
+        document.querySelector("body").style.backgroundColor = 'green';
+        function info(){
+            alert("Felipe Fung Zheng\n\nFrom 06/07/25 to 20/07/25\n\nFavorite clubs: Spurs and Real Madrid")
+        }
+        
+    </script>
+</html>
