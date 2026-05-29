@@ -21,7 +21,7 @@
             border-color: rgb(0, 38, 95);
         }
     </style>
-    <body>
+    <body style="background-color: rgb(0, 115, 255);">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <header>
@@ -30,59 +30,36 @@
         <main>
             <h2 style="position: absolute;left:24vw;top:8vh">Serie A Standings</h2>
             <table>
-                <thead id="standings-head"></thead>
-                <tbody id="standings-body"></tbody>
+                <thead>
+                    <tr><th>Position</th><th>Team</th><th>Mp</th><th>Pts</th><th>Top scorer</th><th>Gls/90</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Inter</td><td>28</td><td>67</td><td>Lautaro Martínez-14</td><td>2.29</td></tr>
+                    <tr><td>2</td><td>Milan</td><td>28</td><td>60</td><td>Rafael Leão-9</td><td>1.57</td></tr>
+                    <tr><td>3</td><td>Napoli</td><td>28</td><td>56</td><td>Rasmus Højlund-9</td><td>1.54</td></tr>
+                    <tr><td>4</td><td>Como</td><td>28</td><td>51</td><td>Anastasios Douvikas,Nicolás Paz-9</td><td>1.64</td></tr>
+                    <tr><td>5</td><td>Roma</td><td>28</td><td>51</td><td>Donyell Malen,Matìas Soulé-6</td><td>1.36</td></tr>
+                    <tr><td>6</td><td>Juventus</td><td>28</td><td>50</td><td>Kenan Yıldız-9</td><td>1.79</td></tr>
+                    <tr><td>7</td><td>Atalanta</td><td>28</td><td>46</td><td>Gianluca Scamacca-8</td><td>1.39</td></tr>
+                    <tr><td>8</td><td>Bologna</td><td>28</td><td>39</td><td>Riccardo Orsolini,Santiago Castro-7</td><td>1.32</td></tr>
+                    <tr><td>9</td><td>Sassuolo</td><td>28</td><td>38</td><td>Domenico Berardi-7</td><td>1.25</td></tr>
+                    <tr><td>10</td><td>Lazio</td><td>28</td><td>37</td><td>Danilo Cataldi,Pedro... -3</td><td>1.0</td></tr>
+                    <tr><td>11</td><td>Udinese</td><td>28</td><td>36</td><td>Keinan Davis-9</td><td>1.18</td></tr>
+                    <tr><td>12</td><td>Parma</td><td>28</td><td>34</td><td>Mateo Pellegrino-7</td><td>0.71</td></tr>
+                    <tr><td>13</td><td>Genoa</td><td>28</td><td>30</td><td>Lorenzo Colombo-6</td><td>1.21</td></tr>
+                    <tr><td>14</td><td>Cagliari</td><td>28</td><td>30</td><td>Sebastiano Esposito,Semih Kılıçsoy-4</td><td>1.07</td></tr>
+                    <tr><td>15</td><td>Torino</td><td>28</td><td>30</td><td>Nikola Vlašić,Giovanni Simeone-6</td><td>1.0</td></tr>
+                    <tr><td>16</td><td>Lecce</td><td>28</td><td>27</td><td>Lassana Coulibaly,Lameck Banda... -3</td><td>0.71</td></tr>
+                    <tr><td>17</td><td>Fiorentina</td><td>28</td><td>25</td><td>Moise Kean-8</td><td>1.07</td></tr>
+                    <tr><td>18</td><td>Cremonese</td><td>28</td><td>24</td><td>Federico Bonazzoli-6</td><td>0.79</td></tr>
+                    <tr><td>19</td><td>Hellas Verona</td><td>28</td><td>18</td><td>Gift Orban-7</td><td>0.79</td></tr>
+                    <tr><td>20</td><td>Pisa</td><td>28</td><td>15</td><td>Stefano Moreo-5</td><td>0.71</td></tr>
+                </tbody>
             </table>
-                        <script>
-                        // Fetch and display seriaA standings from CSV, including dynamic headers
-                        fetch('standings/seriaA26.csv')
-                            .then(response => response.text())
-                            .then(data => {
-                                const lines = data.trim().split(/\r?\n/);
-                                if (lines.length === 0) return;
-                                const head = document.getElementById('standings-head');
-                                const tbody = document.getElementById('standings-body');
-                                head.innerHTML = '';
-                                tbody.innerHTML = '';
-                                // Parse headers
-                                const headers = lines[0].split(',');
-                                const trHead = document.createElement('tr');
-                                headers.forEach(h => {
-                                    const th = document.createElement('th');
-                                    th.textContent = h;
-                                    trHead.appendChild(th);
-                                });
-                                head.appendChild(trHead);
-                                // Parse rows
-                                for (let i = 1; i < lines.length; i++) {
-                                    // Handle quoted fields with commas
-                                    const cols = [];
-                                    let cur = '', inQuotes = false;
-                                    for (let j = 0; j < lines[i].length; j++) {
-                                        const char = lines[i][j];
-                                        if (char === '"') inQuotes = !inQuotes;
-                                        else if (char === ',' && !inQuotes) { cols.push(cur); cur = ''; }
-                                        else cur += char;
-                                    }
-                                    cols.push(cur);
-                                    const tr = document.createElement('tr');
-                                    cols.forEach((col, idx) => {
-                                        const td = document.createElement('td');
-                                        td.textContent = col;
-                                        if (headers[idx] && headers[idx].toLowerCase().includes('team')) td.style.textAlign = 'left';
-                                        tr.appendChild(td);
-                                    });
-                                    tbody.appendChild(tr);
-                                }
-                            });
-                        </script>
         </main>
         <button class="buttonsize buttoncolor"><a href="pl.html"><spanPrevious>Previous</spanPrevious></a></button>
         <button class="buttonsize buttoncolor" style="left: 7.5vw"><a href="homepage.html"><spanHome>Home</spanHome></a></button>
         <button class="buttonsize buttoncolor" style="left: 14vw"><a href="laliga.html"><spanNext>Next</spanNext></a></button>
     
     </body>
-    <script>
-        document.querySelector("body").style.backgroundColor = "rgb(0, 115, 255)";
-    </script>
 </html>

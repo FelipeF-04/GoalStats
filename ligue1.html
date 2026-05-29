@@ -17,7 +17,7 @@
             border-color: rgb(0, 42, 6);
         }
 </style>
-    <body>
+    <body style="background-color: purple;">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <header>
@@ -26,59 +26,34 @@
         <main>
             <h2 style="position: absolute;left:24vw;top:8vh">Ligue 1 Standings</h2>
             <table>
-                <thead id="standings-head"></thead>
-                <tbody id="standings-body"></tbody>
+                <thead>
+                    <tr><th>Position</th><th>Team</th><th>Mp</th><th>Pts</th><th>Top scorer</th><th>Gls/90</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Paris Saint-Germain</td><td>25</td><td>57</td><td>Bradley Barcola-10</td><td>2.16</td></tr>
+                    <tr><td>2</td><td>Lens</td><td>25</td><td>56</td><td>Wesley Saïd-10</td><td>1.92</td></tr>
+                    <tr><td>3</td><td>Marseille</td><td>25</td><td>46</td><td>Mason Greenwood-15</td><td>2.08</td></tr>
+                    <tr><td>4</td><td>Lyon</td><td>25</td><td>46</td><td>Pavel Šulc-10</td><td>1.6</td></tr>
+                    <tr><td>5</td><td>Rennes</td><td>25</td><td>43</td><td>Esteban Lepaul-12</td><td>1.68</td></tr>
+                    <tr><td>6</td><td>Lille</td><td>25</td><td>41</td><td>Olivier Giroud,Hákon Haraldsson... -5</td><td>1.52</td></tr>
+                    <tr><td>7</td><td>Monaco</td><td>25</td><td>40</td><td>Ansu Fati-8</td><td>1.72</td></tr>
+                    <tr><td>8</td><td>Strasbourg</td><td>25</td><td>36</td><td>Joaquín Panichelli-14</td><td>1.6</td></tr>
+                    <tr><td>9</td><td>Brest</td><td>25</td><td>36</td><td>Romain Del Castillo-8</td><td>1.36</td></tr>
+                    <tr><td>10</td><td>Lorient</td><td>25</td><td>34</td><td>Pablo Pagis-8</td><td>1.4</td></tr>
+                    <tr><td>11</td><td>Angers</td><td>25</td><td>32</td><td>Sidiki Cherif-4</td><td>0.92</td></tr>
+                    <tr><td>12</td><td>Toulouse</td><td>25</td><td>31</td><td>Yann Gboho-6</td><td>1.32</td></tr>
+                    <tr><td>13</td><td>Paris FC</td><td>25</td><td>27</td><td>Ilan Kebbal-8</td><td>1.16</td></tr>
+                    <tr><td>14</td><td>Le Havre</td><td>25</td><td>26</td><td>Issa Soumaré-6</td><td>0.8</td></tr>
+                    <tr><td>15</td><td>Nice</td><td>25</td><td>24</td><td>Sofiane Diop-7</td><td>1.2</td></tr>
+                    <tr><td>16</td><td>Auxerre</td><td>25</td><td>19</td><td>Lassine Sinayoko-6</td><td>0.76</td></tr>
+                    <tr><td>17</td><td>Nantes</td><td>25</td><td>17</td><td>Matthis Abline-4</td><td>0.88</td></tr>
+                    <tr><td>18</td><td>Metz</td><td>25</td><td>13</td><td>Gauthier Hein-6</td><td>0.88</td></tr>
+                </tbody>
             </table>
-                        <script>
-                        // Fetch and display Ligue 1 standings from CSV, including dynamic headers
-                        fetch('standings/Ligue126.csv')
-                            .then(response => response.text())
-                            .then(data => {
-                                const lines = data.trim().split(/\r?\n/);
-                                if (lines.length === 0) return;
-                                const head = document.getElementById('standings-head');
-                                const tbody = document.getElementById('standings-body');
-                                head.innerHTML = '';
-                                tbody.innerHTML = '';
-                                // Parse headers
-                                const headers = lines[0].split(',');
-                                const trHead = document.createElement('tr');
-                                headers.forEach(h => {
-                                    const th = document.createElement('th');
-                                    th.textContent = h;
-                                    trHead.appendChild(th);
-                                });
-                                head.appendChild(trHead);
-                                // Parse rows
-                                for (let i = 1; i < lines.length; i++) {
-                                    // Handle quoted fields with commas
-                                    const cols = [];
-                                    let cur = '', inQuotes = false;
-                                    for (let j = 0; j < lines[i].length; j++) {
-                                        const char = lines[i][j];
-                                        if (char === '"') inQuotes = !inQuotes;
-                                        else if (char === ',' && !inQuotes) { cols.push(cur); cur = ''; }
-                                        else cur += char;
-                                    }
-                                    cols.push(cur);
-                                    const tr = document.createElement('tr');
-                                    cols.forEach((col, idx) => {
-                                        const td = document.createElement('td');
-                                        td.textContent = col;
-                                        if (headers[idx] && headers[idx].toLowerCase().includes('team')) td.style.textAlign = 'left';
-                                        tr.appendChild(td);
-                                    });
-                                    tbody.appendChild(tr);
-                                }
-                            });
-                        </script>
         </main>
         <button class="buttonsize buttoncolor"><a href="bundesliga.html"><spanPrevious>Previous</spanPrevious></a></button>
         <button class="buttonsize buttoncolor" style="left: 7.5vw"><a href="homepage.html"><spanHome>Home</spanHome></a></button>
         <button class="buttonsize buttoncolor" style="left: 14vw"><a href="primeriraliga.html"><spanNext>Next</spanNext></a></button>
     
     </body>
-    <script>
-        document.querySelector("body").style.backgroundColor = "purple";
-    </script>
 </html>

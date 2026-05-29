@@ -22,7 +22,7 @@
             border-color: rgb(0, 42, 6);
         }
 </style>
-    <body>
+    <body style="background-color: green;">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <header>
@@ -31,59 +31,34 @@
         <main>
             <h2 style="position: absolute;left:24vw;top:8vh">Primeira Liga Standings</h2>
             <table>
-                <thead id="standings-head"></thead>
-                <tbody id="standings-body"></tbody>
+                <thead>
+                    <tr><th>Position</th><th>Team</th><th>Mp</th><th>Pts</th><th>Top scorer</th><th>Gls/90</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Porto</td><td>25</td><td>66</td><td>Samu Omorodion-12</td><td>1.96</td></tr>
+                    <tr><td>2</td><td>Sporting CP</td><td>25</td><td>62</td><td>Luis Javier Suárez-23</td><td>2.56</td></tr>
+                    <tr><td>3</td><td>Benfica</td><td>25</td><td>59</td><td>Vangelis Pavlidis-21</td><td>2.12</td></tr>
+                    <tr><td>4</td><td>Braga</td><td>25</td><td>46</td><td>Rodrigo Zalazar-14</td><td>2.08</td></tr>
+                    <tr><td>5</td><td>Gil Vicente FC</td><td>25</td><td>41</td><td>Pablo-10</td><td>1.48</td></tr>
+                    <tr><td>6</td><td>Famalicão</td><td>25</td><td>39</td><td>Gustavo sá,Yassir Zabiri-4</td><td>1.2</td></tr>
+                    <tr><td>7</td><td>Moreirense</td><td>25</td><td>35</td><td>Guilherme Schettine-9</td><td>1.24</td></tr>
+                    <tr><td>8</td><td>Estoril</td><td>25</td><td>34</td><td>Yanis Begraoui-17</td><td>1.84</td></tr>
+                    <tr><td>9</td><td>Vitória Guimarães</td><td>25</td><td>32</td><td>Samu,Oumar Camara-4</td><td>1.12</td></tr>
+                    <tr><td>10</td><td>Alverca</td><td>25</td><td>28</td><td>Marko Milovanović-7</td><td>0.96</td></tr>
+                    <tr><td>11</td><td>Arouca</td><td>25</td><td>26</td><td>Alfonso Trezza-8</td><td>1.28</td></tr>
+                    <tr><td>12</td><td>Estrela</td><td>25</td><td>25</td><td>Kikas-6</td><td>1.12</td></tr>
+                    <tr><td>13</td><td>Rio Ave</td><td>25</td><td>24</td><td>Clayton-10</td><td>0.96</td></tr>
+                    <tr><td>14</td><td>Casa Pia</td><td>25</td><td>24</td><td>Cassiano-5</td><td>1.04</td></tr>
+                    <tr><td>15</td><td>Santa Clara</td><td>25</td><td>22</td><td>Vinícius-5</td><td>0.88</td></tr>
+                    <tr><td>16</td><td>Nacional</td><td>25</td><td>22</td><td>Jesús Ramírez-13</td><td>1.16</td></tr>
+                    <tr><td>17</td><td>Tondela</td><td>25</td><td>19</td><td>Maranhão-6</td><td>0.76</td></tr>
+                    <tr><td>18</td><td>AVS Futebol</td><td>25</td><td>10</td><td>Nenê-4</td><td>0.72</td></tr>
+                </tbody>
             </table>
-                        <script>
-                        // Fetch and display Primeira Liga standings from CSV, including dynamic headers
-                        fetch('standings/PrimeiraLiga26.csv')
-                            .then(response => response.text())
-                            .then(data => {
-                                const lines = data.trim().split(/\r?\n/);
-                                if (lines.length === 0) return;
-                                const head = document.getElementById('standings-head');
-                                const tbody = document.getElementById('standings-body');
-                                head.innerHTML = '';
-                                tbody.innerHTML = '';
-                                // Parse headers
-                                const headers = lines[0].split(',');
-                                const trHead = document.createElement('tr');
-                                headers.forEach(h => {
-                                    const th = document.createElement('th');
-                                    th.textContent = h;
-                                    trHead.appendChild(th);
-                                });
-                                head.appendChild(trHead);
-                                // Parse rows
-                                for (let i = 1; i < lines.length; i++) {
-                                    // Handle quoted fields with commas
-                                    const cols = [];
-                                    let cur = '', inQuotes = false;
-                                    for (let j = 0; j < lines[i].length; j++) {
-                                        const char = lines[i][j];
-                                        if (char === '"') inQuotes = !inQuotes;
-                                        else if (char === ',' && !inQuotes) { cols.push(cur); cur = ''; }
-                                        else cur += char;
-                                    }
-                                    cols.push(cur);
-                                    const tr = document.createElement('tr');
-                                    cols.forEach((col, idx) => {
-                                        const td = document.createElement('td');
-                                        td.textContent = col;
-                                        if (headers[idx] && headers[idx].toLowerCase().includes('team')) td.style.textAlign = 'left';
-                                        tr.appendChild(td);
-                                    });
-                                    tbody.appendChild(tr);
-                                }
-                            });
-                        </script>
         </main>
         <button class="buttonsize buttoncolor"><a href="ligue1.html"><spanPrevious>Previous</spanPrevious></a></button>
         <button class="buttonsize buttoncolor" style="left: 7.5vw"><a href="homepage.html"><spanHome>Home</spanHome></a></button>
         <button class="buttonsize buttoncolor" style="left: 14vw"><a href="pl.html"><spanNext>Next</spanNext></a></button>
     
     </body>
-    <script>
-        document.querySelector("body").style.backgroundColor = "green";
-    </script>
 </html>
